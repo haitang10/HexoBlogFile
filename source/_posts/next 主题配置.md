@@ -71,4 +71,50 @@ leancloud 无法加载，原因是缺少security 这个安全插件，用来修�
 
 修复此问题见[https://github.com/theme-next/hexo-theme-next/blob/master/docs/zh-CN/LEANCLOUD-COUNTER-SECURITY.md](https://github.com/theme-next/hexo-theme-next/blob/master/docs/zh-CN/LEANCLOUD-COUNTER-SECURITY.md)
 
-## 某些主题设置不会立即生效，请耐心等待几分钟 ##
+## 某些主题设置不会立即生效，请耐心等待几分钟！！！ ##
+
+## 返回顶部按钮在屏幕尺寸小于991px时自动隐藏 ##
+在移动端发现没有返回顶部按钮，调试时发现在页面宽度小于991px时，存在下列css 代码：
+
+    media (min-width: 768px) and (max-width: 991px) {
+  	.back-to-top {
+    display: none !important;
+  		}
+	}
+	@media (max-width: 767px) {
+  	.back-to-top {
+    display: none !important;
+  		}
+	}
+解决办法：
+
+在`\themes\next-reloaded\source\css\_common\components`
+中的`back-to-top.styl`和 `back-to-top-sidebar.styl`文件中删除
+
+    
+  	+tablet() {
+    	fixbutton() if hexo-config('sidebar.onmobile');
+    	hide() if not hexo-config('sidebar.onmobile');
+  		}
+  	+mobile() {
+    	fixbutton() if hexo-config('sidebar.onmobile');
+    	hide() if not hexo-config('sidebar.onmobile');
+ 		}
+
+出现这个现象的原因是在 
+
+`\themes\next-reloaded\source\css\_common\scaffolding\mobile.styl` 
+
+文件中存在这几行代码
+
+     > 768px & < 991px
+		+tablet() {
+		}
+	 < 767px
+		+mobile() {
+		}
+
+
+
+导致在页面宽度小于991px时返回顶部按钮消失
+

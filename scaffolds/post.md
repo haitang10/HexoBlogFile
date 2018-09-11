@@ -1,8 +1,20 @@
 ---
 title: {{ title }}
 date: {{ date }}
-tags:
 categories:
+tags:
+-
+-
+-
+
 password:
 
 ---
+
+
+
+<!-- more -->
+
+
+
+参考资料：

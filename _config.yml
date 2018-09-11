@@ -17,6 +17,9 @@ search:
   field: post
   format: html
   limit: 10000
+# Security
+encrypt:
+  enable: true
 
 # Live2d
 live2d:
